@@ -1,0 +1,19 @@
+{
+  "name": "nucleo",
+  "version": "1.0.0",
+  "description": "node shell scripts -example",
+  "main": "tasks.js",
+  "author": "@_kreo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kreo/nucleo.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "bin": {},
+  "config": {},
+  "scripts": {
+    "stylus": "stylus --sourcemap-inline source/styles/nucleo.styl -o dist/nucleo.css"
+  }
+}
