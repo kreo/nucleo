@@ -9,7 +9,16 @@
     "type": "git",
     "url": "git@github.com:kreo/nucleo.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "babel": "^6.5.2",
+    "browser-sync": "^2.11.2",
+    "gulp": "git+ssh://git@github.com/gulpjs/gulp.git#4.0",
+    "jade": "^1.11.0",
+    "jeet": "^6.1.2",
+    "kouto-swiss": "^0.12.0",
+    "rupture": "^0.6.1",
+    "webpack": "^1.12.14"
+  },
   "devDependencies": {},
   "bin": {},
   "config": {},
