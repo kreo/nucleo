@@ -13,9 +13,12 @@
     "babel": "^6.5.2",
     "browser-sync": "^2.11.2",
     "gulp": "git+ssh://git@github.com/gulpjs/gulp.git#4.0",
+    "http-server": "^0.9.0",
     "jade": "^1.11.0",
     "jeet": "^6.1.2",
     "kouto-swiss": "^0.12.0",
+    "nodemon": "^1.9.1",
+    "nunjucks": "^2.4.1",
     "rupture": "^0.6.1",
     "webpack": "^1.12.14"
   },
@@ -23,6 +26,7 @@
   "bin": {},
   "config": {},
   "scripts": {
-    "stylus": "stylus --sourcemap-inline source/styles/nucleo.styl -o dist/nucleo.css"
+    "stylus": "stylus --sourcemap-inline source/styles/nucleo.styl -o dist/nucleo.css",
+    "jade": "jade source/markup/index.jade -o dist"
   }
 }
