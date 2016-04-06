@@ -32,24 +32,24 @@ gulp.task('sass', function() {
 });
 
 // Stylus
-// gulp.task('stylus', function() {
-//     return gulp.src(paths.stylus.src)
-//         .pipe(stylus().on('error', stylus.logError))
-//         .pipe(gulp.dest(paths.stylus.dest));
-// });
+gulp.task('stylus', function() {
+    return gulp.src(paths.stylus.src)
+        .pipe(stylus().on('error', stylus.logError))
+        .pipe(gulp.dest(paths.stylus.dest));
+});
 
-gulp.task('ds', function () {
-      gulp.src(paths.src + '/**/*.styl')
-        // .pipe(sourcemaps.init())
-        .pipe(stylus({
-        //   paths:  ['node_modules'],
-        //   import: ['jeet/stylus/jeet', 'rupture/rupture'],
-        //   use: [nib()]
-        }))
-        // .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(paths.dist))
-        // .pipe(browserSync.stream());
-    });
+// gulp.task('ds', function () {
+//       gulp.src(paths.src + '/**/*.styl')
+//         // .pipe(sourcemaps.init())
+//         .pipe(stylus({
+//         //   paths:  ['node_modules'],
+//         //   import: ['jeet/stylus/jeet', 'rupture/rupture'],
+//         //   use: [nib()]
+//         }))
+//         // .pipe(sourcemaps.write('.'))
+//         .pipe(gulp.dest(paths.dist))
+//         // .pipe(browserSync.stream());
+//     });
 
 // ------------------------------------ Gulp Testing Message
 gulp.task('message', function() {
