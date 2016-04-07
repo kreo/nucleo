@@ -10,32 +10,39 @@
     "url": "git@github.com:kreo/nucleo.git"
   },
   "dependencies": {
-    "babel": "^6.5.2",
+    "axis": "^0.6.1",
     "browser-sync": "^2.11.2",
-    "foundation-sites": "^6.2.0",
-    "gulp-sass": "^2.2.0",
+    "browserify": "^13.0.0",
+    "gulp-jade-globbing": "^0.1.9",
     "gulp-stylus": "^2.3.1",
     "http-server": "^0.9.0",
     "jade": "^1.11.0",
     "jeet": "^6.1.2",
     "kouto-swiss": "^0.12.0",
-    "node-sass": "^3.4.2",
-    "node-sass-globbing": "0.0.23",
     "nodemon": "^1.9.1",
-    "nunjucks": "^2.4.1",
+    "npm-run-all": "^1.7.0",
     "rupture": "^0.6.1",
-    "typographic": "github:corysimmons/typographic",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-stream": "^3.1.0"
+    "typographic": "github:corysimmons/typographic"
   },
   "devDependencies": {},
   "bin": {},
-  "config": {},
+  "config": {
+    "styles": {
+      "source": "source/styles/index.styl",
+      "dest": "dist/app.css",
+      "opt": {}
+    },
+    "scripts": {
+      "source": "source/scripts/index.js",
+      "dest": "dist/app.js",
+      "opt": {}
+    },
+    "port": "9001"
+  },
   "scripts": {
-    "stylus": "stylus --sourcemap-inline source/styles/nucleo.styl -o dist/nucleo.css",
-    "sass": "node-sass --include-path sass source/styles/app.sass dist/app.css",
-    "jade": "jade source/markup/index.jade -o dist",
-    "watch-sass": "nodemon -e sass -x 'npm run sass'"
+    "stylus": "stylus --sourcemap-inline source/styles/index.styl -o dist/app.css",
+    "jade": "jade source/markup/* source/markup/**/* -P -o dist",
+    "browserify": "browserify -d source/scripts/index.js -o dist/app.js",
+    "watch-stylus": "stylus --sourcemap-inline -w source/styles/index.styl -o dist/app.css"
   }
 }

@@ -1,6 +1,7 @@
 // =========================================================
 // gulpfile.js
 // =========================================================
+
 // ------------------------------------------------ requires
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
@@ -8,28 +9,19 @@ var gulp = require('gulp'),
 
 // ------------------------------------------------- configs
 var paths = {
-    src: 'source',
-    dist: 'dist',
     sass: {
         src: 'source/**/*.{scss,sass}',
-        dest: 'dist',
+        dest: 'dist/styles',
         opts: {}
     },
     stylus: {
         src: 'source/**/*.{styl}',
-        dest: 'dist',
+        dest: 'dist/styles',
         opts: {}
     }
 };
 
 // ---------------------------------------------- Gulp Tasks
-
-// Sass
-gulp.task('sass', function() {
-    return gulp.src(paths.sass.src)
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(paths.sass.dest));
-});
 
 // Stylus
 gulp.task('stylus', function() {
