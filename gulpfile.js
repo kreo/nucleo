@@ -1,64 +1,69 @@
-// =========================================================
-// gulpfile.js
-// =========================================================
+// ---------------------------------------------------------
+// Gulpfile.js
+// ---------------------------------------------------------
 
-// ------------------------------------------------ requires
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    stylus = require('gulp-stylus');
+var gulp = require("gulp");
+var $ = {
+    extend: require('extend'),
+    fs: require("fs"),
+    path: require("path"),
+    del: require("del"),
+    notify: require("gulp-notify"),
+    browserSync: require('browser-sync'),
+    size: require("gulp-size"),
+    rename: require("gulp-rename"),
+    taskListing: require("gulp-task-listing"),
+    requireDir: require("require-dir"),
+    gulpIf: require("gulp-if")
+};
 
-// ------------------------------------------------- configs
-var paths = {
-    sass: {
-        src: 'source/**/*.{scss,sass}',
-        dest: 'dist/styles',
-        opts: {}
-    },
-    stylus: {
-        src: 'source/**/*.{styl}',
-        dest: 'dist/styles',
-        opts: {}
+
+// Config
+// ---------------------------------------------------------
+
+var config = {
+    dest: "./dist",
+    source: "./source",
+    label: {
+        app: "app",
+        vendor: "vendor"
     }
 };
 
-// ---------------------------------------------- Gulp Tasks
+// Methods
+// ---------------------------------------------------------
+
+var errors = function() {
+    // Send error to notification center with gulp-notify
+    $.notify.onError({
+        title: "Compile Error",
+        message: "<%= error %>"
+    }).apply(this, Array.prototype.slice.call(arguments));
+
+    // Keep gulp from hanging on this task
+    this.emit('end');
+};
+
+// Tasks
+// ---------------------------------------------------------
+
+var tasks = $.requireDir("./tasks", {
+    recurse: true
+});
+
+// Default
+gulp.task("default", function() {
+    $.taskListing();
+});
 
 // Stylus
-gulp.task('stylus', function() {
-    return gulp.src(paths.stylus.src)
-        .pipe(stylus().on('error', stylus.logError))
-        .pipe(gulp.dest(paths.stylus.dest));
-});
+gulp.task("delete:stylus", tasks.stylus(gulp, $, config, errors).deleteStylus);
+gulp.task("create:stylus", tasks.stylus(gulp, $, config, errors).createStylus);
 
-// gulp.task('ds', function () {
-//       gulp.src(paths.src + '/**/*.styl')
-//         // .pipe(sourcemaps.init())
-//         .pipe(stylus({
-//         //   paths:  ['node_modules'],
-//         //   import: ['jeet/stylus/jeet', 'rupture/rupture'],
-//         //   use: [nib()]
-//         }))
-//         // .pipe(sourcemaps.write('.'))
-//         .pipe(gulp.dest(paths.dist))
-//         // .pipe(browserSync.stream());
-//     });
+// Sass
+gulp.task("delete:sass", tasks.sass(gulp, $, config, errors).deleteSass);
+gulp.task("create:sass", tasks.sass(gulp, $, config, errors).createSass);
 
-// ------------------------------------ Gulp Testing Message
-gulp.task('message', function() {
-    console.log('It works!!');
-});
-
-// ---------------------------------------------- Gulp Watch
-gulp.task('watch:styles', function() {
-    gulp.watch(paths.sass.src, gulp.series('sass'));
-});
-
-gulp.task('watch', gulp.series('sass',
-    gulp.parallel('watch:styles')
-));
-
-
-// -------------------------------------------- Default task
-gulp.task('default', gulp.series('sass',
-    gulp.parallel('message', 'watch')
-));
+// Browserify
+gulp.task("delete:browserify", tasks.browserify(gulp, $, config, errors).deleteBrowserify);
+gulp.task("create:browserify", tasks.browserify(gulp, $, config, errors).createBrowserify);

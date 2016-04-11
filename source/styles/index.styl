@@ -7,18 +7,14 @@
  |--------------------------------------------------------------------------
  */
 
-// Dependencies
-// @require "node_modules/kouto-swiss"
-@require "node_modules/axis/axis"
-@require "node_modules/rupture/rupture"
-@require "node_modules/jeet/stylus/jeet"
-@require "node_modules/typographic/stylus/typographic"
+// dependencies ------------------------------------------------------------
+// loaded directly from gulpfile.js
 
-// Nucleo
-@require "dna"
-@require "quarks"
-@require "atoms"
-@require "molecules"
-@require "organisms"
-@require "skins"
-@require "mutations"
+// nucleo ------------------------------------------------------------------
+@require "dna" // Application rules
+@require "quarks" // Smallest base units n helpers
+@require "atoms" // Components that contains units
+@require "molecules" // Modules n sections that contains components
+@require "organisms" // Views that contains modules
+@require "skins" // Theme variants
+@require "mutations" // Ecceptions n States of the Application

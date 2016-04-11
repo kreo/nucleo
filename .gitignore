@@ -1,5 +1,9 @@
 *.log
 *.css.map
 .sass-cache/
+.scss-lint.yml
+.sass-lint.yml
+.idea
 .DS_Store
 node_modules
+dist
