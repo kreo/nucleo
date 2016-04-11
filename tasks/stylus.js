@@ -60,8 +60,8 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.rename({ basename: config.label.app }))
             .pipe($.sourcemaps.write(config.sourcemaps))
             .pipe(gulp.dest(config.dest))
-            .pipe($.size({ showFiles: true }))
-            .pipe($.browserSync.stream());
+            .pipe($.browserSync.reload({stream:true}))
+            .pipe($.size({ showFiles: true }));
     };
 
     // Public

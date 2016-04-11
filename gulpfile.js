@@ -14,12 +14,13 @@ var $ = {
     rename: require("gulp-rename"),
     taskListing: require("gulp-task-listing"),
     requireDir: require("require-dir"),
-    gulpIf: require("gulp-if")
+    if: require("gulp-if"),
+    argv: require("yargs"),
+    runSequence: require("run-sequence"),
+    shell: require("gulp-shell")
 };
 
-
-// Config
-// ---------------------------------------------------------
+// Config -------------------------------------------------
 
 var config = {
     dest: "./dist",
@@ -30,10 +31,9 @@ var config = {
     }
 };
 
-// Methods
-// ---------------------------------------------------------
+// Methods ------------------------------------------------
 
-var errors = function() {
+function errors () {
     // Send error to notification center with gulp-notify
     $.notify.onError({
         title: "Compile Error",
@@ -42,28 +42,40 @@ var errors = function() {
 
     // Keep gulp from hanging on this task
     this.emit('end');
-};
+}
 
-// Tasks
-// ---------------------------------------------------------
+function getTask (task) {
+    return require('./tasks/' + task)(gulp, $, config, errors);
+}
 
-var tasks = $.requireDir("./tasks", {
-    recurse: true
-});
+// Tasks -------------------------------------------------
 
 // Default
 gulp.task("default", function() {
     $.taskListing();
 });
 
-// Stylus
-gulp.task("delete:stylus", tasks.stylus(gulp, $, config, errors).deleteStylus);
-gulp.task("create:stylus", tasks.stylus(gulp, $, config, errors).createStylus);
-
 // Sass
-gulp.task("delete:sass", tasks.sass(gulp, $, config, errors).deleteSass);
-gulp.task("create:sass", tasks.sass(gulp, $, config, errors).createSass);
+// gulp.task("delete:sass", getTask("sass").deleteSass);
+// gulp.task("create:sass", getTask("sass").createSass);
+// gulp.task("sass", ["delete:sass", "create:sass"]);
+
+// Stylus
+gulp.task("delete:stylus", getTask("stylus").deleteStylus);
+gulp.task("create:stylus", getTask("stylus").createStylus);
+gulp.task("stylus", ["delete:stylus", "create:stylus"]);
 
 // Browserify
-gulp.task("delete:browserify", tasks.browserify(gulp, $, config, errors).deleteBrowserify);
-gulp.task("create:browserify", tasks.browserify(gulp, $, config, errors).createBrowserify);
+gulp.task("delete:browserify", getTask("browserify").deleteBrowserify);
+gulp.task("create:browserify", getTask("browserify").createBrowserify);
+gulp.task("browserify", ["delete:browserify", "create:browserify"]);
+
+// Jade
+gulp.task("delete:jade", getTask("jade").deleteJade);
+gulp.task("create:jade", getTask("jade").createJade);
+gulp.task("jade", ["delete:jade", "create:jade"]);
+
+// BrowserSync
+gulp.task("watch", getTask("serve").watch);
+gulp.task("browser-sync", getTask("serve").sync);
+gulp.task("serve", ["watch", "browser-sync"]);

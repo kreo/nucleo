@@ -2,44 +2,44 @@
 // Pug
 // ---------------------------------------------------------
 
-module.exports = function (gulp, $, config) {
+module.exports = function (gulp, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
     $.extend($, {
-        pug: require("gulp-pug")
+        jade: require("gulp-jade")
     });
 
     // Config
     // ---------------------------------------------------------
 
-    config.pug = {
-        paths: ["/markup"],
+    config.jade = {
+        paths: ["/markup/**/*.jade"],
         opts: {
             pretty: true,
-            cache: false
+            cache: true
         }
     };
 
     // Methods
     // ---------------------------------------------------------
 
-    var deletePug = function () {
+    var deleteJade = function () {
         console.log("deleted");
     };
 
-    var createPug = function () {
-        gulp.src(config.source + config.pug.paths)
-            .pipe($.pug(config.pug))
-            .pipe(gulp.dest(config.dest));
+    var createJade = function () {
+        gulp.src(config.source + config.jade.paths)
+            .pipe($.jade(config.jade.opts))
+            .pipe(gulp.dest(config.dest + "/markup"));
     };
 
     // Public
     // ---------------------------------------------------------
 
     return {
-        deletePug: createPug,
-        createPug: createPug
+        deleteJade: deleteJade,
+        createJade: createJade
     };
 };

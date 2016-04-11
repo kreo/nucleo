@@ -13,18 +13,20 @@ module.exports = function(gulp, $, config, errors) {
         cached: require("gulp-cached"),
         streamify: require("gulp-streamify"),
         mirror: require("gulp-mirror"),
-        vinylSource: require("vinyl-source-stream")
+        vinylSource: require("vinyl-source-stream"),
+        uglify: require("gulp-uglify"),
+        gzip: require("gulp-gzip")
     });
 
     // Config
     // ---------------------------------------------------------
 
-    // var isProd = $.argv.prod || false;
+    var isProd = $.argv.prod || false;
 
     config.browserify = {
         entries: [config.source + "/scripts/index.js"],
         transform: [$.globify],
-        // debug: !isProd
+        debug: !isProd
     };
 
     // Methods
@@ -40,16 +42,17 @@ module.exports = function(gulp, $, config, errors) {
             .on("error", errors)
             .pipe($.vinylSource(config.label.app + ".js"))
             .pipe($.cached('linting'))
-            // .pipe($.streamify(
-            //     $.gulp_if(isProd, $.mirror(
-            //         $.uglify({
-            //             mangle: true
-            //         }), //.pipe($.gitshasuffix()),
-            //         $.uglify({
-            //             mangle: true
-            //         }).pipe($.gzip())
-            //     ))))
+            .pipe($.streamify(
+                $.if(isProd, $.mirror(
+                    $.uglify({
+                        mangle: true
+                    }), //.pipe($.gitshasuffix()),
+                    $.uglify({
+                        mangle: true
+                    }).pipe($.gzip())
+                ))))
             .pipe(gulp.dest(config.dest))
+            .pipe($.browserSync.reload({stream:true}))
             .pipe($.streamify($.size({
                 showFiles: true
             })));
