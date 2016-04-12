@@ -2,7 +2,7 @@
 // Pug
 // ---------------------------------------------------------
 
-module.exports = function (gulp, $, config, errors) {
+module.exports = function(gulp, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
@@ -16,7 +16,7 @@ module.exports = function (gulp, $, config, errors) {
     // ---------------------------------------------------------
 
     config.jade = {
-        paths: ["/**/*.jade"],
+        paths: "/**/*.jade",
         opts: {
             pretty: true,
             cache: true
@@ -26,15 +26,20 @@ module.exports = function (gulp, $, config, errors) {
     // Methods
     // ---------------------------------------------------------
 
-    var deleteJade = function () {
+    var deleteJade = function() {
         $.del(config.dest + "/markup");
     };
 
-    var createJade = function () {
+    var createJade = function() {
         gulp.src(config.source + config.jade.paths)
-            .pipe($.jadeGlobbing())
             .pipe($.jade())
-            .pipe(gulp.dest(config.dest));
+            .pipe(gulp.dest(config.dest))
+            .pipe($.size({
+                showFiles: true
+            }))
+            .pipe($.browserSync.reload({
+                stream: true
+            }));
     };
 
     // Public

@@ -54,12 +54,20 @@ module.exports = function(gulp, $, config, errors) {
             .on('error', errors)
             .pipe($.sourcemaps.write(config.browserify.sourcemaps))
             .pipe($.if(isProd, $.mirror(
-                $.uglify({mangle: true}), //.pipe($.gitshasuffix()),
-                $.uglify({mangle: true}).pipe($.gzip())
+                $.uglify({
+                    mangle: true
+                }), //.pipe($.gitshasuffix()),
+                $.uglify({
+                    mangle: true
+                }).pipe($.gzip())
             )))
             .pipe(gulp.dest(config.dest))
-            .pipe($.browserSync.reload({stream:true}))
-            .pipe($.size({showFiles: true}));
+            .pipe($.browserSync.reload({
+                stream: true
+            }))
+            .pipe($.size({
+                showFiles: true
+            }));
 
         $.globby(config.browserify.entries).then(function(entries) {
             var b = $.browserify({
