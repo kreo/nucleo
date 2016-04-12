@@ -25,15 +25,13 @@ module.exports = function(gulp, $, config, errors) {
     // Config
     // ---------------------------------------------------------
 
-    var isProd = $.argv.prod || $.argv.p || false;
-
     config.browserify = {
         entries: [config.source + "/scripts/*.js"],
         transform: [$.globify, $.debowerify, $.deamdify],
-        debug: !isProd,
+        debug: !config.isProd,
         sourcemaps: {
             includeContent: true,
-            addComment: !isProd
+            addComment: !config.isProd
         }
     };
 
@@ -53,7 +51,7 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.sourcemaps.init())
             .on('error', errors)
             .pipe($.sourcemaps.write(config.browserify.sourcemaps))
-            .pipe($.if(isProd, $.mirror(
+            .pipe($.if(config.isProd, $.mirror(
                 $.uglify({
                     mangle: true
                 }), //.pipe($.gitshasuffix()),
@@ -62,12 +60,12 @@ module.exports = function(gulp, $, config, errors) {
                 }).pipe($.gzip())
             )))
             .pipe(gulp.dest(config.dest))
-            .pipe($.browserSync.reload({
-                stream: true
-            }))
             .pipe($.size({
                 showFiles: true
-            }));
+            }))
+            .pipe($.if(config.isProd, $.browserSync.reload({
+                stream: true
+            })));
 
         $.globby(config.browserify.entries).then(function(entries) {
             var b = $.browserify({

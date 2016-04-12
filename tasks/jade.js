@@ -37,9 +37,9 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.size({
                 showFiles: true
             }))
-            .pipe($.browserSync.reload({
+            .pipe($.if(config.isProd, $.browserSync.reload({
                 stream: true
-            }));
+            })));
     }
 
     // API

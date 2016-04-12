@@ -18,15 +18,33 @@ module.exports = function(gulp, $, config, errors) {
     // Config
     // ---------------------------------------------------------
 
+    var vendorPath = config.source + "/" + config.label.vendor;
+
+    config.bower = {
+        styles: vendorPath + "/**/*.css",
+        scripts: vendorPath + "/**/*.js",
+        fonts: ['slick-carousel'],
+		images: ['slick-carousel'],
+        order: []
+    };
+
     // Private Methods
     // ---------------------------------------------------------
 
-    function createBowerStack(bowerSrc, bowerFiles) {
-        var bowerStack = [];
-        for (var i = 0; i < bowerSrc.length; i++) {
-            bowerStack.push(bowerSrc[i] + bowerFiles);
+    function getEnv() {
+        if ($.argv.prod === true) {
+            return ' -p';
+        } else {
+            return '';
         }
-        return bowerStack;
+    }
+
+    function createVendorStack(vendorSrc, vendorFiles) {
+        var vendorStack = [];
+        for (var i = 0; i < vendorSrc.length; i++) {
+            vendorStack.push(vendorPath + "/" + vendorSrc[i] + vendorFiles);
+        }
+        return vendorStack;
     }
 
     // Public Methods
@@ -40,16 +58,78 @@ module.exports = function(gulp, $, config, errors) {
         ]);
     }
 
-    function createBower() {
-        console.log("created vendor files");
+    // @TODO add map to styles
+
+    function createBowerStyles() {
+        gulp.src(config.bower.styles)
+            .pipe($.order(config.bower.order))
+            .pipe($.concat(config.label.vendor + ".css"))
+            .pipe($.replace(/[^'"()]*(\/[\w-]*(\.(jpeg|jpg|gif|png|woff2|woff|ttf|svg|eot)))/ig, './vendor$1'))
+            .pipe($.if($.argv.prod, $.mirror(
+                $.cssnano(), //.pipe($.gitshasuffix()),
+                $.cssnano().pipe($.gzip())
+            )))
+            .pipe(gulp.dest(config.dest))
+            .on('error', errors)
+            .pipe($.size({
+                showFiles: true
+            }));
+    }
+
+    // @TODO add map to scripts
+
+    function createBowerScripts() {
+        gulp.src(config.bower.scripts)
+            .pipe($.order(config.bower.order))
+            .pipe($.concat(config.label.vendor + ".js"))
+            .pipe($.if($.argv.prod, $.mirror(
+                $.uglify({
+                    mangle: true
+                }), //.pipe($.gitshasuffix()),
+                $.uglify({
+                    mangle: true
+                }).pipe($.gzip())
+            )))
+            .pipe(gulp.dest(config.dest))
+            .on('error', errors)
+            .pipe($.size({
+                showFiles: true
+            }));
+    }
+
+    function createBowerFonts() {
+        gulp.src(createVendorStack(config.bower.fonts, '/*.{ttf,eot,svg,woff,woff2}'))
+            .pipe($.rename({
+                dirname: config.label.vendor
+            }))
+            .pipe(gulp.dest(config.dest))
+            .on('error', errors)
+            .pipe($.size({
+                showFiles: true
+            }));
+    }
+
+    function createBowerImages() {
+        gulp.src(createVendorStack(config.bower.images, '/*.{gif,png,jpg,jpeg,cur}'))
+            .pipe($.rename({
+                dirname: 'vendor'
+            }))
+            .pipe(gulp.dest(config.dest))
+            .on('error', errors)
+            .pipe($.size({
+                showFiles: true
+            }));
     }
 
     // API
     // ---------------------------------------------------------
 
     return {
-        installBower: $.shell.task("bower-installer"),
+        installBower: $.shell.task("bower-installer" + getEnv()),
         deleteBower: deleteBower,
-        createBower: createBower
+        createBowerStyles: createBowerStyles,
+        createBowerScripts: createBowerScripts,
+        createBowerFonts: createBowerFonts,
+        createBowerImages: createBowerImages
     };
 };

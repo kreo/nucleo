@@ -28,7 +28,8 @@ var config = {
     label: {
         app: "app",
         vendor: "vendor"
-    }
+    },
+    isProd: $.argv.prod || $.argv.p || false
 };
 
 // Methods
@@ -53,14 +54,9 @@ function getTask(task) {
 // ---------------------------------------------------------
 
 // Default
-gulp.task("default", function() {
+gulp.task("default", function(){
     $.taskListing();
 });
-
-// Sass
-// gulp.task("delete:sass", getTask("sass").deleteSass);
-// gulp.task("create:sass", getTask("sass").createSass);
-// gulp.task("sass", ["delete:sass", "create:sass"]);
 
 // Stylus
 gulp.task("delete:stylus", getTask("stylus").deleteStylus);
@@ -80,12 +76,27 @@ gulp.task("jade", ["delete:jade", "create:jade"]);
 // Bower
 gulp.task("install:bower", getTask("bower").installBower);
 gulp.task("delete:bower", getTask("bower").deleteBower);
-gulp.task("create:bower", getTask("bower").createBower);
+gulp.task("create:bower.styles", getTask("bower").createBowerStyles);
+gulp.task("create:bower.scripts", getTask("bower").createBowerScripts);
+gulp.task("create:bower.fonts", getTask("bower").createBowerFonts);
+gulp.task("create:bower.images", getTask("bower").createBowerImages);
 gulp.task("bower", ["delete:bower"], function() {
-    $.runSequence("install:bower",["create:bower"]);
+    $.runSequence("install:bower",[
+        "create:bower.styles",
+        "create:bower.scripts",
+        "create:bower.fonts",
+        "create:bower.images"
+    ]);
 });
 
 // BrowserSync
 gulp.task("watch", getTask("serve").watch);
 gulp.task("browser-sync", getTask("serve").sync);
 gulp.task("serve", ["watch", "browser-sync"]);
+
+// Not Used Tasks
+// ---------------------------------------------------------
+// Sass
+// gulp.task("delete:sass", getTask("sass").deleteSass);
+// gulp.task("create:sass", getTask("sass").createSass);
+// gulp.task("sass", ["delete:sass", "create:sass"]);

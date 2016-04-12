@@ -25,8 +25,6 @@ module.exports = function(gulp, $, config, errors) {
     // Config
     // ---------------------------------------------------------
 
-    var isProd = $.argv.prod || $.argv.p || false;
-
     config.stylus = {
         paths: ["/styles/*.styl"],
         opts: {
@@ -38,8 +36,8 @@ module.exports = function(gulp, $, config, errors) {
                 $.typographic()
             ],
             "include css": true,
-            compress: isProd,
-            comment: !isProd
+            compress: config.isProd,
+            comment: !config.isProd
         },
         autoprefixer: {
             browsers: ['last 3 versions'],
@@ -47,7 +45,7 @@ module.exports = function(gulp, $, config, errors) {
         },
         sourcemaps: {
             includeContent: true,
-            addComment: !isProd
+            addComment: !config.isProd
         }
     };
 
@@ -64,24 +62,24 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.buffer())
             .pipe($.sourcemaps.init())
             .pipe($.stylus(config.stylus.opts))
-            .pipe($.if(isProd, $.stylus(config.stylus.opts)))
+            .pipe($.if(config.isProd, $.stylus(config.stylus.opts)))
             .on('error', errors)
             .pipe($.autoprefixer(config.autoprefixer))
             .pipe($.rename({
                 basename: config.label.app
             }))
-            .pipe($.if(!isProd, $.sourcemaps.write(config.sourcemaps)))
-            .pipe($.if(isProd, $.mirror(
+            .pipe($.if(!config.isProd, $.sourcemaps.write(config.sourcemaps)))
+            .pipe($.if(config.isProd, $.mirror(
                 $.cssnano(), //.pipe($.gitshasuffix()),
                 $.cssnano().pipe($.gzip())
             )))
             .pipe(gulp.dest(config.dest))
-            .pipe($.browserSync.reload({
-                stream: true
-            }))
             .pipe($.size({
                 showFiles: true
-            }));
+            }))
+            .pipe($.if(config.isProd, $.browserSync.reload({
+                stream: true
+            })));
     }
 
     // API
