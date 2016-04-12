@@ -2,12 +2,12 @@
 // Serve
 // ---------------------------------------------------------
 
-module.exports = function(gulp, $, config, errors) {
+module.exports = function(gulp, _, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
-    // $.extend($, {});
+    // _.extend($, {});
 
     // Config
     // ---------------------------------------------------------

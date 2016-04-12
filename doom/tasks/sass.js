@@ -2,12 +2,12 @@
 // Sass
 // ---------------------------------------------------------
 
-module.exports = function(gulp, $, config, errors) {
+module.exports = function(gulp, _, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
-    $.extend($, {
+    _.extend($, {
         sass: require("gulp-sass"),
         autoprefixer: require("gulp-autoprefixer"),
         sourcemaps: require("gulp-sourcemaps"),
@@ -40,7 +40,7 @@ module.exports = function(gulp, $, config, errors) {
     // ---------------------------------------------------------
 
     function deleteSass () {
-        $.del(config.dest + "/" + config.label.app + ".{css,css.map,css.gz}");
+        $.del(config.dest + "/" + config.app + ".{css,css.map,css.gz}");
     }
 
     function createSass () {
@@ -49,7 +49,7 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.sass(config.sass.opts))
             .on('error', errors)
             .pipe($.autoprefixer(config.autoprefixer)
-            .pipe($.rename({ basename: config.label.app }))
+            .pipe($.rename({ basename: config.app }))
             .pipe(gulp.dest(config.dest))
             .pipe($.size({ showFiles: true })));
     }

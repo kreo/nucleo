@@ -2,12 +2,12 @@
 // Browserify
 // ---------------------------------------------------------
 
-module.exports = function(gulp, $, config, errors) {
+module.exports = function(gulp, _, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
-    $.extend($, {
+    _.extend($, {
         browserify: require("browserify"),
         globify: require("require-globify"),
         globby: require("globby"),
@@ -39,13 +39,13 @@ module.exports = function(gulp, $, config, errors) {
     // ---------------------------------------------------------
 
     function deleteBrowserify() {
-        $.del(config.dest + "/" + config.label.app + ".{js,js.map,js.gz}");
+        $.del(config.dest + "/" + config.app + ".{js,js.map,js.gz}");
     }
 
     function createBrowserify() {
         var bundledStream = $.through();
 
-        bundledStream.pipe($.source(config.label.app + ".js"))
+        bundledStream.pipe($.source(config.app + ".js"))
             .pipe($.cached('linting'))
             .pipe($.buffer())
             .pipe($.sourcemaps.init())

@@ -2,12 +2,12 @@
 // Bower
 // ---------------------------------------------------------
 
-module.exports = function(gulp, $, config, errors) {
+module.exports = function(gulp, _, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
-    $.extend($, {
+    _.extend($, {
         order: require("gulp-order"),
         replace: require("gulp-replace"),
         concat: require("gulp-concat"),
@@ -18,7 +18,7 @@ module.exports = function(gulp, $, config, errors) {
     // Config
     // ---------------------------------------------------------
 
-    var vendorPath = config.source + "/" + config.label.vendor;
+    var vendorPath = config.source + "/" + config.vendor;
 
     config.bower = {
         styles: vendorPath + "/**/*.css",
@@ -53,8 +53,8 @@ module.exports = function(gulp, $, config, errors) {
     function deleteBower() {
         $.del([
             "./bower_components",
-            config.dest + "/" + config.label.vendor,
-            config.source + "/" + config.label.vendor
+            config.dest + "/" + config.vendor,
+            config.source + "/" + config.vendor
         ]);
     }
 
@@ -63,7 +63,7 @@ module.exports = function(gulp, $, config, errors) {
     function createBowerStyles() {
         gulp.src(config.bower.styles)
             .pipe($.order(config.bower.order))
-            .pipe($.concat(config.label.vendor + ".css"))
+            .pipe($.concat(config.vendor + ".css"))
             .pipe($.replace(/[^'"()]*(\/[\w-]*(\.(jpeg|jpg|gif|png|woff2|woff|ttf|svg|eot)))/ig, './vendor$1'))
             .pipe($.if($.argv.prod, $.mirror(
                 $.cssnano(), //.pipe($.gitshasuffix()),
@@ -81,7 +81,7 @@ module.exports = function(gulp, $, config, errors) {
     function createBowerScripts() {
         gulp.src(config.bower.scripts)
             .pipe($.order(config.bower.order))
-            .pipe($.concat(config.label.vendor + ".js"))
+            .pipe($.concat(config.vendor + ".js"))
             .pipe($.if($.argv.prod, $.mirror(
                 $.uglify({
                     mangle: true
@@ -100,7 +100,7 @@ module.exports = function(gulp, $, config, errors) {
     function createBowerFonts() {
         gulp.src(createVendorStack(config.bower.fonts, '/*.{ttf,eot,svg,woff,woff2}'))
             .pipe($.rename({
-                dirname: config.label.vendor
+                dirname: config.vendor
             }))
             .pipe(gulp.dest(config.dest))
             .on('error', errors)

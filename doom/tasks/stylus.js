@@ -2,12 +2,12 @@
 // Stylus
 // ---------------------------------------------------------
 
-module.exports = function(gulp, $, config, errors) {
+module.exports = function(gulp, _, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
-    $.extend($, {
+    _.extend($, {
         stylus: require('gulp-stylus'),
         autoprefixer: require("gulp-autoprefixer"),
         sourcemaps: require("gulp-sourcemaps"),
@@ -53,7 +53,7 @@ module.exports = function(gulp, $, config, errors) {
     // ---------------------------------------------------------
 
     function deleteStylus() {
-        $.del(config.dest + "/" + config.label.app + ".{css,css.map,css.gz}");
+        $.del(config.dest + "/" + config.app + ".{css,css.map,css.gz}");
     }
 
     function createStylus() {
@@ -66,7 +66,7 @@ module.exports = function(gulp, $, config, errors) {
             .on('error', errors)
             .pipe($.autoprefixer(config.autoprefixer))
             .pipe($.rename({
-                basename: config.label.app
+                basename: config.app
             }))
             .pipe($.if(!config.isProd, $.sourcemaps.write(config.sourcemaps)))
             .pipe($.if(config.isProd, $.mirror(

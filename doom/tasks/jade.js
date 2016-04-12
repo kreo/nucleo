@@ -1,13 +1,13 @@
 // ---------------------------------------------------------
-// Pug
+// Jade
 // ---------------------------------------------------------
 
-module.exports = function(gulp, $, config, errors) {
+module.exports = function(gulp, _, $, config, errors) {
 
     // Dependencies
     // ---------------------------------------------------------
 
-    $.extend($, {
+    _.extend($, {
         jade: require("gulp-jade"),
         jadeGlobbing: require("gulp-jade-globbing")
     });

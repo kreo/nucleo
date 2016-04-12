@@ -2,9 +2,16 @@
 // Gulpfile.js
 // ---------------------------------------------------------
 
+// var Doom = function(task) {
+//     require('require-dir')('./doom/tasks');
+//     task(Doom.config);
+// };
+//
+// Doom.config = require('./doom/config');
+
 var gulp = require("gulp");
+var _ = require('underscore');
 var $ = {
-    extend: require('extend'),
     fs: require("fs"),
     path: require("path"),
     del: require("del"),
@@ -16,6 +23,7 @@ var $ = {
     if: require("gulp-if"),
     argv: require("yargs").argv,
     runSequence: require("run-sequence").use(gulp),
+    requireDir: require("require-dir"),
     shell: require("gulp-shell")
 };
 
@@ -25,10 +33,8 @@ var $ = {
 var config = {
     dest: "./dist",
     source: "./source",
-    label: {
-        app: "app",
-        vendor: "vendor"
-    },
+    app: "app",
+    vendor: "vendor",
     isProd: $.argv.prod || $.argv.p || false
 };
 
@@ -47,7 +53,7 @@ function errors() {
 }
 
 function getTask(task) {
-    return require('./tasks/' + task)(gulp, $, config, errors);
+    return require('./doom/tasks/' + task)(gulp, _, $, config, errors);
 }
 
 // Tasks
