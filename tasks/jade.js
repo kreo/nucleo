@@ -8,14 +8,15 @@ module.exports = function (gulp, $, config, errors) {
     // ---------------------------------------------------------
 
     $.extend($, {
-        jade: require("gulp-jade")
+        jade: require("gulp-jade"),
+        jadeGlobbing: require("gulp-jade-globbing")
     });
 
     // Config
     // ---------------------------------------------------------
 
     config.jade = {
-        paths: ["/markup/**/*.jade"],
+        paths: ["/**/*.jade"],
         opts: {
             pretty: true,
             cache: true
@@ -26,13 +27,14 @@ module.exports = function (gulp, $, config, errors) {
     // ---------------------------------------------------------
 
     var deleteJade = function () {
-        console.log("deleted");
+        $.del(config.dest + "/markup");
     };
 
     var createJade = function () {
         gulp.src(config.source + config.jade.paths)
-            .pipe($.jade(config.jade.opts))
-            .pipe(gulp.dest(config.dest + "/markup"));
+            .pipe($.jadeGlobbing())
+            .pipe($.jade())
+            .pipe(gulp.dest(config.dest));
     };
 
     // Public

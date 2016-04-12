@@ -29,6 +29,7 @@
     "gulp-gzip": "^1.2.0",
     "gulp-if": "^2.0.0",
     "gulp-jade": "^1.1.0",
+    "gulp-jade-globbing": "^0.1.9",
     "gulp-mirror": "^1.0.0",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
