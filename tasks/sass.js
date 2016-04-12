@@ -36,14 +36,14 @@ module.exports = function(gulp, $, config, errors) {
         }
     };
 
-    // Methods
+    // Public Methods
     // ---------------------------------------------------------
 
-    var deleteSass = function () {
+    function deleteSass () {
         $.del(config.dest + "/" + config.label.app + ".{css,css.map,css.gz}");
-    };
+    }
 
-    var createSass = function () {
+    function createSass () {
         gulp.src(config.source + config.sass.paths)
             .pipe($.cssGlobbing({ extensions: ['.scss', '.sass'] }))
             .pipe($.sass(config.sass.opts))
@@ -52,9 +52,9 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.rename({ basename: config.label.app }))
             .pipe(gulp.dest(config.dest))
             .pipe($.size({ showFiles: true })));
-    };
+    }
 
-    // Public
+    // API
     // ---------------------------------------------------------
 
     return {

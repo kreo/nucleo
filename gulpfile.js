@@ -13,15 +13,14 @@ var $ = {
     size: require("gulp-size"),
     rename: require("gulp-rename"),
     taskListing: require("gulp-task-listing"),
-    requireDir: require("require-dir"),
     if: require("gulp-if"),
     argv: require("yargs").argv,
-    runSequence: require("run-sequence"),
-    shell: require("gulp-shell"),
-    util: require("gulp-util")
+    runSequence: require("run-sequence").use(gulp),
+    shell: require("gulp-shell")
 };
 
-// Config -------------------------------------------------
+// Config
+// ---------------------------------------------------------
 
 var config = {
     dest: "./dist",
@@ -32,9 +31,10 @@ var config = {
     }
 };
 
-// Methods ------------------------------------------------
+// Methods
+// ---------------------------------------------------------
 
-function errors () {
+function errors() {
     // Send error to notification center with gulp-notify
     $.notify.onError({
         title: "Compile Error",
@@ -45,11 +45,12 @@ function errors () {
     this.emit('end');
 }
 
-function getTask (task) {
+function getTask(task) {
     return require('./tasks/' + task)(gulp, $, config, errors);
 }
 
-// Tasks -------------------------------------------------
+// Tasks
+// ---------------------------------------------------------
 
 // Default
 gulp.task("default", function() {
@@ -75,6 +76,14 @@ gulp.task("browserify", ["delete:browserify", "create:browserify"]);
 gulp.task("delete:jade", getTask("jade").deleteJade);
 gulp.task("create:jade", getTask("jade").createJade);
 gulp.task("jade", ["delete:jade", "create:jade"]);
+
+// Bower
+gulp.task("install:bower", getTask("bower").installBower);
+gulp.task("delete:bower", getTask("bower").deleteBower);
+gulp.task("create:bower", getTask("bower").createBower);
+gulp.task("bower", ["delete:bower"], function() {
+    $.runSequence("install:bower",["create:bower"]);
+});
 
 // BrowserSync
 gulp.task("watch", getTask("serve").watch);

@@ -23,14 +23,14 @@ module.exports = function(gulp, $, config, errors) {
         }
     };
 
-    // Methods
+    // Public Methods
     // ---------------------------------------------------------
 
-    var deleteJade = function() {
+    function deleteJade() {
         $.del(config.dest + "/markup");
-    };
+    }
 
-    var createJade = function() {
+    function createJade() {
         gulp.src(config.source + config.jade.paths)
             .pipe($.jade())
             .pipe(gulp.dest(config.dest))
@@ -40,9 +40,9 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.browserSync.reload({
                 stream: true
             }));
-    };
+    }
 
-    // Public
+    // API
     // ---------------------------------------------------------
 
     return {

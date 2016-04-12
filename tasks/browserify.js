@@ -37,14 +37,14 @@ module.exports = function(gulp, $, config, errors) {
         }
     };
 
-    // Methods
+    // Public Methods
     // ---------------------------------------------------------
 
-    var deleteBrowserify = function() {
+    function deleteBrowserify() {
         $.del(config.dest + "/" + config.label.app + ".{js,js.map,js.gz}");
-    };
+    }
 
-    var createBrowserify = function() {
+    function createBrowserify() {
         var bundledStream = $.through();
 
         bundledStream.pipe($.source(config.label.app + ".js"))
@@ -82,9 +82,9 @@ module.exports = function(gulp, $, config, errors) {
         });
 
         return bundledStream;
-    };
+    }
 
-    // Public
+    // API
     // ---------------------------------------------------------
 
     return {

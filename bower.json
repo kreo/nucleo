@@ -1,0 +1,40 @@
+{
+    "name": "nucleo",
+    "description": "acss+bem framework",
+    "main": "tasks.js",
+    "authors": [
+        "@kreo"
+    ],
+    "license": "MIT",
+    "keywords": [
+        "nucleo"
+    ],
+    "homepage": "https://github.com/kreo/nucleo",
+    "moduleType": [],
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests",
+        "_test",
+        "_tests",
+        "example",
+        "examples",
+        "_example",
+        "_examples"
+    ],
+    "dependencies": {
+        "magnific-popup": "^1.1.0"
+    },
+    "resolutions": {
+        "jquery": "~2.2.3"
+    },
+    "overrides": {},
+    "install": {
+        "base": "source",
+        "path": "vendor",
+        "sources": {}
+    }
+}

@@ -51,14 +51,14 @@ module.exports = function(gulp, $, config, errors) {
         }
     };
 
-    // Methods
+    // Public Methods
     // ---------------------------------------------------------
 
-    var deleteStylus = function() {
+    function deleteStylus() {
         $.del(config.dest + "/" + config.label.app + ".{css,css.map,css.gz}");
-    };
+    }
 
-    var createStylus = function() {
+    function createStylus() {
         gulp.src(config.source + config.stylus.paths)
             .pipe($.cached('stylus'))
             .pipe($.buffer())
@@ -82,9 +82,9 @@ module.exports = function(gulp, $, config, errors) {
             .pipe($.size({
                 showFiles: true
             }));
-    };
+    }
 
-    // Public
+    // API
     // ---------------------------------------------------------
 
     return {

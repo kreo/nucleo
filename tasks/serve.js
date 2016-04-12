@@ -4,11 +4,13 @@
 
 module.exports = function(gulp, $, config, errors) {
 
-    // Dependencies ----------------------------------------
+    // Dependencies
+    // ---------------------------------------------------------
 
     // $.extend($, {});
 
-    // Config ----------------------------------------------
+    // Config
+    // ---------------------------------------------------------
 
     config.serve = {
         stylus: "/styles/**/*.styl",
@@ -16,24 +18,26 @@ module.exports = function(gulp, $, config, errors) {
         jade: "./dist/*.html"
     };
 
-    // Methods ---------------------------------------------
+    // Public Methods
+    // ---------------------------------------------------------
 
-    var watch = function() {
+    function watch() {
         gulp.watch(config.source + config.serve.stylus, ['stylus']);
         gulp.watch(config.source + config.serve.browserify, ['browserify']);
         gulp.watch(config.serve.jade, $.browserSync.reload);
-    };
+    }
 
-    var sync = function() {
+    function sync() {
         $.browserSync({
             // proxy: "localhost:9001",
             server: {
                 baseDir: "./"
             }
         });
-    };
+    }
 
-    // Public ----------------------------------------------
+    // API
+    // ---------------------------------------------------------
 
     return {
         watch: watch,
