@@ -21,12 +21,12 @@ module.exports = function(gulp, $, config, errors) {
     // Private Methods
     // ---------------------------------------------------------
 
-    function createBowerStack(vendorSrc, vendorFiles) {
-        var vendorStack = [];
-        for (var i = 0; i < vendor_src.length; i++) {
-            vendorStack.push(vendorSrc[i] + vendorFiles);
+    function createBowerStack(bowerSrc, bowerFiles) {
+        var bowerStack = [];
+        for (var i = 0; i < bowerSrc.length; i++) {
+            bowerStack.push(bowerSrc[i] + bowerFiles);
         }
-        return vendorStack;
+        return bowerStack;
     }
 
     // Public Methods
