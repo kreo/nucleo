@@ -15,9 +15,10 @@ var $ = {
     taskListing: require("gulp-task-listing"),
     requireDir: require("require-dir"),
     if: require("gulp-if"),
-    argv: require("yargs"),
+    argv: require("yargs").argv,
     runSequence: require("run-sequence"),
-    shell: require("gulp-shell")
+    shell: require("gulp-shell"),
+    util: require("gulp-util")
 };
 
 // Config -------------------------------------------------
