@@ -15,13 +15,8 @@ module.exports = (function (gulp, _, $, config, utils) {
         this.emit('end');
     }
 
-    function run(name, tasks, cb) {
-        gulp.task(name, tasks, cb);
-    }
-
     return {
-        errors: errors,
-        run: run
+        errors: errors
     };
 
 })();
