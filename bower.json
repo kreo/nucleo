@@ -28,11 +28,11 @@
   },
   "overrides": {},
   "install": {
-    "base": "source",
+    "base": "./source",
     "path": "vendor",
     "sources": {
       "slick-carousel": [
-    		"bower_components/slick-carousel/slick/slick.min.js",
+        "bower_components/slick-carousel/slick/slick.min.js",
         "bower_components/slick-carousel/slick/slick.css",
         "bower_components/slick-carousel/slick/slick-theme.css",
         "bower_components/slick-carousel/slick/ajax-loader.gif",

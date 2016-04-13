@@ -10,7 +10,8 @@
 var admin = require('./organisms/_admin');
 var auth = require('./organisms/_auth');
 
-(function(){
+$(function(){
+	$(document).foundation();
 	console.log('Application entry');
 	admin.init();
 	auth.init();
