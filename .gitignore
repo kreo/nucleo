@@ -1,3 +1,5 @@
+*.pid
+*.seed
 *.log
 *.css.map
 .sass-cache/
@@ -5,6 +7,13 @@
 .sass-lint.yml
 .idea
 .DS_Store
+.npm
+.node_repl_history
+.grunt
+.lock-wscript
+logs
+npm-debug.log*
+pids
 node_modules
 bower_components
 dist
@@ -12,3 +21,7 @@ source/vendor
 no-u
 _tests
 _examples
+build/Release
+node_modules
+lib-cov
+coverage
