@@ -4,9 +4,7 @@
 
 var gulp = require("gulp");
 var _ = require("underscore");
-var jsonfile = require("jsonfile");
 var config = require("mojs/lib/config");
-var bowerJson = require("./bower.json");
 
 // Config
 // ---------------------------------------------------------
@@ -26,16 +24,6 @@ _.extend(config, {
     }
 });
 
-bowerJson.install.base = config.source;
-jsonfile.writeFile("./bower.json", bowerJson, {
-    spaces: 2
-}, function(err) {
-    if (err !== null) {
-        return;
-        // console.error(err);
-    }
-});
-
 var mo = require("mojs")(gulp, _, config);
 
 // Tasks
@@ -51,4 +39,4 @@ mo("browserify");
 mo("jade");
 mo("serve");
 mo("bower");
-// mo("sass");
+mo("sass");
