@@ -2,7 +2,7 @@
 // Browserify
 // ---------------------------------------------------------
 
-module.exports = function(gulp, _, $, config, errors) {
+module.exports = function(gulp, _, $, config, utils) {
 
     // Dependencies
     // ---------------------------------------------------------
@@ -38,55 +38,64 @@ module.exports = function(gulp, _, $, config, errors) {
     // Public Methods
     // ---------------------------------------------------------
 
-    function deleteBrowserify() {
-        $.del(config.dest + "/" + config.app + ".{js,js.map,js.gz}");
+    function clean() {
+        gulp.task("clean:browserify", function(){
+            $.del(config.dest + "/" + config.app + ".{js,js.map,js.gz}");
+        });
     }
 
-    function createBrowserify() {
-        var bundledStream = $.through();
+    function create() {
+        gulp.task("create:browserify", function(){
+            var bundledStream = $.through();
 
-        bundledStream.pipe($.source(config.app + ".js"))
-            .pipe($.cached('linting'))
-            .pipe($.buffer())
-            .pipe($.sourcemaps.init())
-            .on('error', errors)
-            .pipe($.sourcemaps.write(config.browserify.sourcemaps))
-            .pipe($.if(config.isProd, $.mirror(
-                $.uglify({
-                    mangle: true
-                }), //.pipe($.gitshasuffix()),
-                $.uglify({
-                    mangle: true
-                }).pipe($.gzip())
-            )))
-            .pipe(gulp.dest(config.dest))
-            .pipe($.size({
-                showFiles: true
-            }))
-            .pipe($.if(config.isProd, $.browserSync.reload({
-                stream: true
-            })));
+            bundledStream.pipe($.source(config.app + ".js"))
+                .pipe($.cached('linting'))
+                .pipe($.buffer())
+                .pipe($.sourcemaps.init())
+                .on('error', utils.errors)
+                .pipe($.sourcemaps.write(config.browserify.sourcemaps))
+                .pipe($.if(config.isProd, $.mirror(
+                    $.uglify({
+                        mangle: true
+                    }), //.pipe($.gitshasuffix()),
+                    $.uglify({
+                        mangle: true
+                    }).pipe($.gzip())
+                )))
+                .pipe(gulp.dest(config.dest))
+                .pipe($.size({
+                    showFiles: true
+                }))
+                .pipe($.if(config.isProd, $.browserSync.reload({
+                    stream: true
+                })));
 
-        $.globby(config.browserify.entries).then(function(entries) {
-            var b = $.browserify({
-                entries: entries,
-                transform: config.browserify.transform,
-                debug: config.browserify.debug
+            $.globby(config.browserify.entries).then(function(entries) {
+                var b = $.browserify({
+                    entries: entries,
+                    transform: config.browserify.transform,
+                    debug: config.browserify.debug
+                });
+
+                b.bundle().pipe(bundledStream);
+            }).catch(function(err) {
+                bundledStream.emit('error', err);
             });
 
-            b.bundle().pipe(bundledStream);
-        }).catch(function(err) {
-            bundledStream.emit('error', err);
+            return bundledStream;
         });
+    }
 
-        return bundledStream;
+    function bundle() {
+        gulp.task("browserify", ["clean:browserify", "create:browserify"]);
     }
 
     // API
     // ---------------------------------------------------------
 
     return {
-        deleteBrowserify: deleteBrowserify,
-        createBrowserify: createBrowserify
+        clean: clean(),
+        create: create(),
+        bundle: bundle()
     };
 };

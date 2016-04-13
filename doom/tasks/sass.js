@@ -2,7 +2,7 @@
 // Sass
 // ---------------------------------------------------------
 
-module.exports = function(gulp, _, $, config, errors) {
+module.exports = function(gulp, _, $, config, utils) {
 
     // Dependencies
     // ---------------------------------------------------------
@@ -39,26 +39,42 @@ module.exports = function(gulp, _, $, config, errors) {
     // Public Methods
     // ---------------------------------------------------------
 
-    function deleteSass () {
-        $.del(config.dest + "/" + config.app + ".{css,css.map,css.gz}");
+    function clean() {
+        gulp.task("clean:sass", function() {
+            $.del(config.dest + "/" + config.app + ".{css,css.map,css.gz}");
+        });
     }
 
-    function createSass () {
-        gulp.src(config.source + config.sass.paths)
-            .pipe($.cssGlobbing({ extensions: ['.scss', '.sass'] }))
-            .pipe($.sass(config.sass.opts))
-            .on('error', errors)
-            .pipe($.autoprefixer(config.autoprefixer)
-            .pipe($.rename({ basename: config.app }))
-            .pipe(gulp.dest(config.dest))
-            .pipe($.size({ showFiles: true })));
+    function create() {
+        gulp.task("create:sass", function() {
+            gulp.src(config.source + config.sass.paths)
+                .pipe($.cssGlobbing({
+                    extensions: ['.scss', '.sass']
+                }))
+                .pipe($.sass(config.sass.opts))
+                .on('error', utils.errors)
+                .pipe($.autoprefixer(config.autoprefixer)
+                    .pipe($.rename({
+                        basename: config.app
+                    }))
+                    .pipe(gulp.dest(config.dest))
+                    .pipe($.size({
+                        showFiles: true
+                    })));
+        });
+    }
+
+    function bundle() {
+        gulp.task("sass", ["clean:sass", "create:sass"]);
     }
 
     // API
     // ---------------------------------------------------------
 
     return {
-        deleteSass: deleteSass,
-        createSass: createSass
+        clean: clean(),
+        create: create(),
+        bundle: bundle()
     };
+
 };

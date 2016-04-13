@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axis": "^0.6.1",
+    "babelify": "^7.2.0",
     "bower-installer": "^1.2.0",
     "browser-sync": "^2.11.2",
     "browserify": "^13.0.0",

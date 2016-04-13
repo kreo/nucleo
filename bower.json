@@ -16,13 +16,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests",
-    "_test",
     "_tests",
-    "example",
-    "examples",
-    "_example",
     "_examples"
   ],
   "dependencies": {

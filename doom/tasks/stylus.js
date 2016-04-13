@@ -2,7 +2,7 @@
 // Stylus
 // ---------------------------------------------------------
 
-module.exports = function(gulp, _, $, config, errors) {
+module.exports = function(gulp, _, $, config, utils) {
 
     // Dependencies
     // ---------------------------------------------------------
@@ -52,18 +52,21 @@ module.exports = function(gulp, _, $, config, errors) {
     // Public Methods
     // ---------------------------------------------------------
 
-    function deleteStylus() {
-        $.del(config.dest + "/" + config.app + ".{css,css.map,css.gz}");
+    function clean() {
+        gulp.task("clean:stylus", function(){
+            $.del(config.dest + "/" + config.app + ".{css,css.map,css.gz}");
+        });
     }
 
-    function createStylus() {
-        gulp.src(config.source + config.stylus.paths)
+    function create() {
+        gulp.task("create:stylus", function(){
+            gulp.src(config.source + config.stylus.paths)
             .pipe($.cached('stylus'))
             .pipe($.buffer())
             .pipe($.sourcemaps.init())
             .pipe($.stylus(config.stylus.opts))
             .pipe($.if(config.isProd, $.stylus(config.stylus.opts)))
-            .on('error', errors)
+            .on('error', utils.errors)
             .pipe($.autoprefixer(config.autoprefixer))
             .pipe($.rename({
                 basename: config.app
@@ -80,13 +83,20 @@ module.exports = function(gulp, _, $, config, errors) {
             .pipe($.if(config.isProd, $.browserSync.reload({
                 stream: true
             })));
+        });
+    }
+
+    function bundle() {
+        gulp.task("stylus", ["clean:stylus", "create:stylus"]);
     }
 
     // API
     // ---------------------------------------------------------
 
     return {
-        deleteStylus: deleteStylus,
-        createStylus: createStylus
+        clean: clean(),
+        create: create(),
+        bundle: bundle()
     };
+
 };

@@ -2,7 +2,7 @@
 // Jade
 // ---------------------------------------------------------
 
-module.exports = function(gulp, _, $, config, errors) {
+module.exports = function(gulp, _, $, config, utils) {
 
     // Dependencies
     // ---------------------------------------------------------
@@ -26,27 +26,37 @@ module.exports = function(gulp, _, $, config, errors) {
     // Public Methods
     // ---------------------------------------------------------
 
-    function deleteJade() {
-        $.del(config.dest + "/markup");
+    function clean() {
+        gulp.task("clean:jade", function() {
+            $.del(config.dest + "/markup");
+        });
     }
 
-    function createJade() {
-        gulp.src(config.source + config.jade.paths)
-            .pipe($.jade())
-            .pipe(gulp.dest(config.dest))
-            .pipe($.size({
-                showFiles: true
-            }))
-            .pipe($.if(config.isProd, $.browserSync.reload({
-                stream: true
-            })));
+    function create() {
+        gulp.task("create:jade", function() {
+            gulp.src(config.source + config.jade.paths)
+                .pipe($.jade())
+                .on('error', utils.errors)
+                .pipe(gulp.dest(config.dest))
+                .pipe($.size({
+                    showFiles: true
+                }))
+                .pipe($.if(config.isProd, $.browserSync.reload({
+                    stream: true
+                })));
+        });
+    }
+
+    function bundle() {
+        gulp.task("jade", ["clean:jade", "create:jade"]);
     }
 
     // API
     // ---------------------------------------------------------
 
     return {
-        deleteJade: deleteJade,
-        createJade: createJade
+        clean: clean(),
+        create: create(),
+        bundle: bundle()
     };
 };
