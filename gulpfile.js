@@ -36,8 +36,9 @@ gulp.task("default", function() {
 });
 
 mo("stylus");
+mo("sass");
 mo("browserify");
 mo("jade");
-mo("serve");
 mo("bower");
-mo("sass");
+mo("serve");
+mo("build");
