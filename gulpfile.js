@@ -3,7 +3,7 @@
 // ---------------------------------------------------------
 
 var gulp = require("gulp");
-var doom = require("./doom")(gulp);
+var mo = require("mojs")(gulp);
 
 // Tasks
 // ---------------------------------------------------------
@@ -13,9 +13,9 @@ gulp.task("default", function() {
     $.taskListing();
 });
 
-doom("stylus");
-doom("browserify");
-doom("jade");
-doom("serve");
-doom("bower");
-doom("sass");
+mo("stylus");
+mo("browserify");
+mo("jade");
+mo("serve");
+mo("bower");
+// mo("sass");
