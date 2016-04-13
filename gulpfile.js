@@ -8,6 +8,7 @@ var config = require("mojs/lib/config");
 
 // Config
 // ---------------------------------------------------------
+
 _.extend(config, {
     source: "./source",
     dest: "./dist",
