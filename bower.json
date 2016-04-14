@@ -32,6 +32,10 @@
     "base": "./source",
     "path": "vendor",
     "sources": {
+      "foundation-sites": [
+        "bower_components/foundation-sites/dist/foundation.js",
+        "bower_components/foundation-sites/dist/foundation.css"
+      ],
       "slick-carousel": [
         "bower_components/slick-carousel/slick/slick.min.js",
         "bower_components/slick-carousel/slick/slick.css",

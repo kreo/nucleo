@@ -4,7 +4,7 @@
 
 var gulp = require("gulp");
 var _ = require("underscore");
-var config = require("mojs/lib/config");
+var config = require("mojs/core/config");
 
 // Config
 // ---------------------------------------------------------
@@ -39,6 +39,7 @@ mo("stylus");
 mo("sass");
 mo("browserify");
 mo("jade");
+mo("images");
 mo("bower");
 mo("serve");
 mo("build");
