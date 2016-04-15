@@ -43,6 +43,6 @@ mo.run([
     "build"
 ]);
 
-mo.extend("custom", function(){
-    console.log("this is a custom task!");
-});
+// mo.extend("custom", function(){
+//     console.log("this is a custom task!");
+// });
