@@ -1,21 +1,67 @@
+
+//
+ |--------------------------------------------------------------------------
+ | Nucleo - ACSS+BEM Agnostic Framework
+ |--------------------------------------------------------------------------
+ | author: @kreo
+ | https://github.com/kreo
+ |
+//
+
 doctype html
 html(lang="it")
   head
     title= pageTitle
+    
+    // Styles
+    // ---------------------------------------------------------
     link(href="../vendor.css", rel="stylesheet")
     link(href="../app.css", rel="stylesheet")
+  
+  // Body
+  // ---------------------------------------------------------
   body
-    h1 Jade - node template engine
-    .col
-      if youAreUsingJade
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Jade is a terse and simple
-        templating language with a
-        strong focus on performance
-        and powerful features.
+    .wrap
+      
+      header.header
+        .header__bar
+        .header__bar
+          .brand
+          nav
+            ul.list
+              li
+                a(href="javascript:") item
+
+              li
+                a(href="javascript:") item 
+              
+              li
+                a(href="javascript:") item       
+      
+      
+      .hero
+        .hero__content
+          h1 base template
+          
+        .hero__background  
+        
+        .hero__overlay.
+          asdas
+          asd
+          
+      .content
+        .content__left
+          
+        .content__right
+        
+      footer.footer
+        .footer__nav
+          ul.list
+            li
+              
+        .footer__copy  
     
+    // Scripts
+    // ---------------------------------------------------------
     script(src="../vendor.js")    
     script(src="../app.js")      
