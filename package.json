@@ -10,8 +10,7 @@
     "url": "git@github.com:kreo/nucleo.git"
   },
   "dependencies": {
-    "bower-installer": "^1.2.0",
-    "underscore": "^1.8.3"
+    "bower-installer": "^1.2.0"
   },
   "devDependencies": {},
   "bin": {},
