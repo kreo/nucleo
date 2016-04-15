@@ -1,6 +1,6 @@
 /*
  |--------------------------------------------------------------------------
- | Mofile
+ | Mo - Settings
  |--------------------------------------------------------------------------
  | author: @kreo
  | https://github.com/kreo
@@ -30,6 +30,7 @@ var mo = require("mojs")(gulp, {
 
 mo.run([
     "default",
+    "clean",
     "stylus",
     "sass",
     "browserify",
@@ -41,3 +42,7 @@ mo.run([
     "serve",
     "build"
 ]);
+
+mo.extend("custom", function(){
+    console.log("this is a custom task!");
+});
