@@ -30,11 +30,9 @@ var mo = require("mojs")(gulp, {
 
 mo.run([
     "default",
-    "clean",
     "stylus",
     "sass",
     "browserify",
-    "jade",
     "jade",
     "images",
     "fonts",

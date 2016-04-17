@@ -9,15 +9,25 @@
 
 /*jshint esversion: 6 */
 
+var app = {};
+
+var admin = require('./organisms/_admin');
 var admin = require('./organisms/_admin');
 var auth = require('./organisms/_auth');
 
-(function(){
+function common() {
 
-	$(document).foundation();
+}
 
-	console.log('Application entry');
-	admin.init();
-	auth.init();
+(function($) {
 
-})();
+    $(document).foundation();
+    common();
+
+})(jQuery);
+
+
+
+console.log('Application entry');
+admin.init();
+auth.init();
