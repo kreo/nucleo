@@ -15,7 +15,7 @@ var admin = require("./organisms/_admin");
 var auth = require("./organisms/_auth");
 
 function common() {
-
+    console.log("stocazzo di pagina!");
 }
 
 (function($) {

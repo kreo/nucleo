@@ -1,0 +1,185 @@
+// @settings
+// -------------------------
+$settings: (
+	debug: false,
+	legacy-support: 'ie8'
+);
+
+// @layout
+// -------------------------
+$layout: (
+	'cols': 12,
+	'gutter': 15px, // 0.9375rem
+	'width': 100%,
+	'min-width': 305px,
+	'max-width': 1500px // 75rem
+);
+
+$content: (
+	'min-height': 500px
+);
+
+// @class_prefix
+//-------------------------
+$class-prefix: (
+	'object': 'o--',
+	'component': 'c--',
+	'module': 'm--',
+	'page': 'p--',
+	'theme': 't--',
+	'hack': 'h--',
+	'gui': 'g--',
+	'state': 's--',
+	'utils': 'u--'
+);
+
+// @z-index
+//-------------------------
+$z-index: (
+	'0': 0,
+	'1': 1,
+	'2': 5,
+	'3': 10,
+	'4': 20,
+	'5': 40,
+	'6': 80,
+	'7': 160,
+	'8': 320,
+	'9': 640,
+	'10': 1280,
+	'11': 2560,
+	'12': 5120,
+	'13': 10240
+);
+
+// @z-items
+//-------------------------
+$z-items: (
+	'global': (
+		'bottom',
+		'middle',
+		'top'
+	),
+	'bottom': (
+		'bottom',
+		'middle',
+		'top'
+	),
+	'top': (
+		'bottom',
+		'middle',
+		'top'
+	)
+);
+
+$z-map: ();
+
+// @mediaqueries
+//-------------------------
+$mq: (
+	'xxs': 0,
+	'xs': 480px,
+	'sm': 768px,
+	'md': 992px,
+	'lg': 1200px,
+	'xl': 1920px
+);
+
+// @sizes
+//-------------------------
+$sizes: (
+	'0': 0,
+	'xxs': 3px,
+	'xs': 5px,
+	'sm': 10px,
+	'md': 20px,
+	'lg': 40px,
+	'xl': 80px
+);
+
+// @sizes
+//-------------------------
+$text: (
+	'xxs': 10px,
+	'xs': 12px,
+	'sm': 14px,
+	'md': 17px,
+	'lg': 24px,
+	'xl': 36px
+);
+
+// @directions
+//-------------------------
+$directions: (
+	'all': a,
+	'vertical': v,
+	'horizontal': h,
+	'top': t,
+	'right': r,
+	'bottom': b,
+	'left': l
+);
+
+// @fonts
+//-------------------------
+$fonts: (
+	'default': ('Helvetica Neue', Helvetica, Arial, sans-serif),
+	'primary': 'Open sans',
+	'secondary': 'Montserrat',
+	'third': 'Raleway',
+	'optional': 'Source Sans Pro'
+);
+
+// @type
+//-------------------------
+$body-font-size: 14px;
+$body-line-height: 1.5;
+$scale-factor: 1.333;
+$computed-line-height: $body-line-height * $body-font-size;
+
+// @colors
+//-------------------------
+
+$color-primary: #067ACB !default;
+$color-secondary: #777 !default;
+$color-success: #3adb76 !default;
+$color-warning: #ffae00 !default;
+$color-alert: #ec5840 !default;
+$color-light-gray: #e6e6e6 !default;
+$color-medium-gray: #cacaca !default;
+$color-dark-gray: #8a8a8a !default;
+$color-black: #0a0a0a !default;
+$color-white: #fefefe !default;
+
+$colors: (
+	'primary': $color-primary,
+	'secondary': $color-secondary,
+	'success': $color-success,
+	'alert': $color-alert,
+	'warning': $color-warning
+);
+
+// @skins
+//-------------------------
+$skins: (
+	'blue': (
+		'lighter-90': lighten($color-primary, 90%),
+		'lighter-80': lighten($color-primary, 80%),
+		'lighter-70': lighten($color-primary, 70%),
+		'lighter-60': lighten($color-primary, 60%),
+		'lighter-50': lighten($color-primary, 50%),
+		'lighter-40': lighten($color-primary, 40%),
+		'lighter-30': lighten($color-primary, 30%),
+		'lighter-20': lighten($color-primary, 20%),
+		'lighter-10': lighten($color-primary, 10%),
+		'normal': $color-primary, 'darker-10': darken($color-primary, 10%),
+		'darker-20': darken($color-primary, 20%),
+		'darker-30': darken($color-primary, 30%),
+		'darker-40': darken($color-primary, 40%),
+		'darker-50': darken($color-primary, 50%),
+		'darker-60': darken($color-primary, 60%),
+		'darker-70': darken($color-primary, 70%),
+		'darker-80': darken($color-primary, 80%),
+		'darker-90': darken($color-primary, 90%)
+	)
+);

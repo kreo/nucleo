@@ -34,21 +34,17 @@ var mo = require("mojs")(gulp, {
 // Tasks
 // ---------------------------------------------------------
 
-mo.run([
+mo.register([
     "default",
     "stylus",
     "browserify",
-    "jade",
+    "pug",
     "images",
     "fonts",
     "bower",
     "serve",
     "build",
-    // "sass",
-    // "mail",
-    //"sprites"
+    "sass",
+    "mail",
+    "sprites"
 ]);
-
-// mo.extend("custom", function(){
-//     console.log("this is a custom task!");
-// });
