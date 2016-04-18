@@ -45,7 +45,7 @@ mo.run([
     "bower",
     "serve",
     "build",
-    "mail"
+    // "mail"
 ]);
 
 // mo.extend("custom", function(){
