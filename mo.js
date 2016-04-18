@@ -22,6 +22,11 @@ var mo = require("mojs")(gulp, {
             "foundation-sites/*.js",
             "**/*.js"
         ]
+    },
+    serve: {
+        host: "project.dev",
+        proxy: "project.dev/",
+        port: "9001"
     }
 });
 
