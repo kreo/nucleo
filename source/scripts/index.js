@@ -11,9 +11,8 @@
 
 var app = {};
 
-var admin = require('./organisms/_admin');
-var admin = require('./organisms/_admin');
-var auth = require('./organisms/_auth');
+var admin = require("./organisms/_admin");
+var auth = require("./organisms/_auth");
 
 function common() {
 
@@ -28,6 +27,6 @@ function common() {
 
 
 
-console.log('Application entry');
+console.log("Application entry");
 admin.init();
 auth.init();

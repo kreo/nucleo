@@ -4,7 +4,7 @@
  |--------------------------------------------------------------------------
  | author: @kreo
  | https://github.com/kreo
- |--------------------------------------------------------------------------
+ |
  */
 
 /*jshint esversion: 6 */
@@ -15,6 +15,7 @@ var mo = require("mojs")(gulp, {
     dest: "./dist",
     app: "app",
     vendor: "vendor",
+    mail: "mail",
     bower: {
         plugins: ["slick-carousel"],
         order: [
@@ -36,14 +37,15 @@ var mo = require("mojs")(gulp, {
 mo.run([
     "default",
     "stylus",
-    "sass",
+    // "sass",
     "browserify",
     "jade",
     "images",
     "fonts",
     "bower",
     "serve",
-    "build"
+    "build",
+    "mail"
 ]);
 
 // mo.extend("custom", function(){
