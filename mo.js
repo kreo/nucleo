@@ -11,8 +11,8 @@
 
 var gulp = require("gulp");
 var mo = require("mojs")(gulp, {
-    source: "./source",
-    dest: "./dist",
+    source: __dirname + "/source",
+    dest: __dirname + "/dist",
     app: "app",
     vendor: "vendor",
     mail: "mail",
@@ -37,7 +37,6 @@ var mo = require("mojs")(gulp, {
 mo.run([
     "default",
     "stylus",
-    // "sass",
     "browserify",
     "jade",
     "images",
@@ -45,7 +44,9 @@ mo.run([
     "bower",
     "serve",
     "build",
-    // "mail"
+    // "sass",
+    // "mail",
+    //"sprites"
 ]);
 
 // mo.extend("custom", function(){

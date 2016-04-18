@@ -12,6 +12,7 @@
 .grunt
 .lock-wscript
 .git
+.vscode
 logs
 npm-debug.log*
 pids
