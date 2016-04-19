@@ -15,5 +15,12 @@
   "devDependencies": {},
   "bin": {},
   "config": {},
-  "scripts": {}
+  "scripts": {
+    "stylus": "stylus --sourcemap-inline source/styles/index.styl -o dist/app.css",
+    "sass": "node-sass --include-path sass source/sass/**/*.{scss,sass} -o dist/sass.css",
+    "jade": "jade source/markup/* source/markup/**/* -P -o dist",
+    "browserify": "browserify -d source/scripts/index.js -o dist/app.js",
+    "watch-stylus": "stylus --sourcemap-inline -w source/styles/index.styl -o dist/app.css",
+    "postinstall": "find node_modules/ -name '*.info' -type f -delete"
+  }
 }

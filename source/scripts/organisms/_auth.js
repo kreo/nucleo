@@ -2,10 +2,8 @@
 // Organisms.Auth
 // ------------------------------------
 
-var init = function (){
-	console.log('oraganism - auth');
-};
+// #Scripts: Add Module IFEE API Auth:js +feature
 
-module.exports = {
-	init: init
+module.exports = function (){
+	console.log('Auth inizialized!');
 };

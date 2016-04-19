@@ -13,6 +13,8 @@
 .lock-wscript
 .git
 .vscode
+.imdone
+iMDone.md
 logs
 npm-debug.log*
 pids

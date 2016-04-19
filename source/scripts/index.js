@@ -9,13 +9,15 @@
 
 /*jshint esversion: 6 */
 
-var app = {};
+// #Scripts: Add APP Object Index/:js +feature
+
+window.app = {};
 
 var admin = require("./organisms/_admin");
 var auth = require("./organisms/_auth");
 
 function common() {
-    console.log("stocazzo di pagina!");
+    console.log("common inizialized!");
 }
 
 (function($) {
@@ -23,10 +25,9 @@ function common() {
     $(document).foundation();
     common();
 
+    console.log("Application entry");
+
 })(jQuery);
 
-
-
-console.log("Application entry");
-admin.init();
-auth.init();
+admin();
+auth();

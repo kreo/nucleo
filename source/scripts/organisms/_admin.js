@@ -2,10 +2,8 @@
 // Organisms.Admin
 // ------------------------------------
 
-var init = function (){
-	console.log('oraganism - admin');
-};
+// #Scripts: Add Module IFEE API  Admin/:js +feature
 
-module.exports = {
-	init: init
+module.exports = function (){
+	console.log('Admin inizialized!');
 };

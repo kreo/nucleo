@@ -17,7 +17,7 @@ var mo = require("mojs")(gulp, {
     vendor: "vendor",
     mail: "mail",
     bower: {
-        plugins: ["slick-carousel"],
+        plugins: ["slick-carousel", "owl-carousel"],
         order: [
             "jquery/*.js",
             "foundation-sites/*.js",
@@ -34,7 +34,7 @@ var mo = require("mojs")(gulp, {
 // Tasks
 // ---------------------------------------------------------
 
-mo.register([
+mo.run([
     "default",
     "stylus",
     "browserify",
@@ -45,6 +45,6 @@ mo.register([
     "serve",
     "build",
     "sass",
-    "mail",
-    "sprites"
+    // "mail",
+    // "sprites"
 ]);
