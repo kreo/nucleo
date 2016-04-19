@@ -1,10 +1,17 @@
-module.exports = function (){
+// ------------------------------------
+// Common
+// ------------------------------------
 
-  function init(){
+/*jshint esversion: 6 */
 
-  }
+var common = function() {
 
-  return {
-    init: init()
-  };
+    function init() {
+        console.log("common initialized!");
+    }
+
+    return init;
+
 };
+
+$.extend(N.views, common);

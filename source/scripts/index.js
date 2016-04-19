@@ -9,25 +9,50 @@
 
 /*jshint esversion: 6 */
 
-// #Scripts: Add APP Object Index/:js +feature
+window.N = {
+    data: {
+        view: $('.js-body').data('current-view').toString()
+    },
+    views: {},
+    global: {
+        getFilename: function(path) {
+            return path.split('/').reverse()[0].replace(/\.[^/.]+$/, '');
+        },
+        load_scripts: function(array, cb) {
+            var loader = function(src, handler) {
+                var script = document.createElement("script");
+                script.src = src;
+                script.onload = script.onreadystatechange = function() {
+                    script.onreadystatechange = script.onload = null;
+                    handler();
+                };
+                var head = document.getElementsByTagName("head")[0];
+                (head || document.body).appendChild(script);
+            };
+            (function() {
+                if (array.length !== 0) {
+                    loader(('https:' === location.protocol ? 'https:' : 'http:') + array.shift(), arguments.callee);
+                } else {
+                    callback && cb();
+                }
+            })();
+        }
+    },
+    lib: {}
+};
 
-window.app = {};
+require("./organisms/*", {mode: "expand"});
 
-var admin = require("./organisms/_admin");
-var auth = require("./organisms/_auth");
-
-function common() {
-    console.log("common inizialized!");
-}
 
 (function($) {
 
+    // Dependencies
+    // -----------------------
     $(document).foundation();
-    common();
 
-    console.log("Application entry");
+    // Views
+    // -----------------------
+    N.views.common();
+    // N.views.current !== undefined ? N.views.current() : false;
 
 })(jQuery);
-
-admin();
-auth();

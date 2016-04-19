@@ -1,9 +1,21 @@
 // ------------------------------------
-// Organisms.Auth
+// Auth
 // ------------------------------------
 
-// #Scripts: Add Module IFEE API Auth:js +feature
+/*jshint esversion: 6 */
 
-module.exports = function (){
-	console.log('Auth inizialized!');
+var auth = function() {
+
+    function init() {
+        console.log("common initialized!");
+    }
+
+    return init;
+
 };
+
+$.extend(N.views, auth);
+
+if (N.data.view === N.global.getFilename(__filename)) {
+	N.views.current = auth;
+}

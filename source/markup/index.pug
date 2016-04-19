@@ -9,17 +9,17 @@ doctype html
 html(lang="it")
   head
     title= pageTitle
-    
+
     // Styles
     // ---------------------------------------------------------
     link(href="../vendor.css", rel="stylesheet")
     link(href="../app.css", rel="stylesheet")
-  
+
   // Body
   // ---------------------------------------------------------
-  body
+  body.js-body(data-current-view="auth")
     .wrap
-      
+
       // header
       header.header
         .header__bar
@@ -31,36 +31,36 @@ html(lang="it")
                 a(href="javascript:") item
 
               li
-                a(href="javascript:") item 
-              
+                a(href="javascript:") item
+
               li
-                a(href="javascript:") item       
-      
+                a(href="javascript:") item
+
       // hero
       section.hero
         .hero__content
           h1 base template
-          
-        .hero__background  
-        
+
+        .hero__background
+
         .hero__overlay.
           asdas
           asd
-      
-      // content    
+
+      // content
       section.content
         .content__left
-          
+
         aside.content__right
-        
+
       footer.footer
         .footer__nav
           ul.list
             li
-              
-        .footer__copy  
-    
+
+        .footer__copy
+
     // Scripts
     // ---------------------------------------------------------
-    script(src="../vendor.js")    
-    script(src="../app.js")      
+    script(src="../vendor.js")
+    script(src="../app.js")
